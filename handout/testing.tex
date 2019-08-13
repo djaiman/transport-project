@@ -1,0 +1,50 @@
+
+\subsection{Virtual Machine}
+For this project, you will do all of your development on your own machine using VMs. You should install VirutalBox~\cite{virtualbox} and Vagrant~\cite{vagrant} on your own machine.
+We have provided a \texttt{Vagrantfile} for two VM's, client and server. If you keep the \texttt{Vagrantfile} in the same directory as the \texttt{15-441-project-2}, folder then you can edit code on your machine, or on either VM, and Vagrant will automatically sync it to both VMs \texttt{/vagrant} directory. Refer to references for more information on how to install and use VirtualBox and Vagrant.\\
+
+The server and client are connected via a private network with IP addresses \texttt{10.0.0.1} and \texttt{10.0.0.2} respectively. (Note: your code should work even if these IP addresses were changed). The interface name for these addresses is \texttt{eth1} on both machines. \\
+
+The following sections we describe the tools that are already installed on the VMs to help you (and us) test your code. You can also install any additional tools you need. Please document any additional tools you install to run tests in the test.txt file.
+
+\subsection{Control the network characteristics with \texttt{tcconfig}}
+\texttt{tcconfig} \cite{tc} is installed on the VMs to enable you to control the network characteristics for traffic between the VMs. The initial default settings on the VMs are a 20ms delay on both machines (so the total RTT is 40ms), and 100Mbps bidirectional bandwidth. Running \texttt{tcshow eth1} on the VMs will show you these settings. Refer to the references for more information on how to use \texttt{tcconfig} to simulate different network characteristics including packet loss, reordering, and corruption which will be useful for testing your code.
+
+\subsection{Capture and analyze packets with \texttt{tcpdump} and \texttt{tshark}}
+
+\texttt{tcpdump}~\cite{tcpdump}  and Wireshark (terminal program: \texttt{tshark}~\cite{tshark}) are installed on the VMs to enable you to capture packets sent between the VMs and analyze them. We provide the following files in the directory \texttt{15-441-project-2/utils/} to help with packet analysis  (feel free to modify these if you want):
+\begin{itemize}
+    \item[--] \texttt{utils/capture\_packets.sh}: A simple program showing how you can start and stop packet captures, as well as analyze packets using \texttt{tshark}. The \texttt{start} function starts a packet capture in the background. The \texttt{stop} function stops a packet capture. Lastly, the \texttt{analyze} function will use \texttt{tshark} to output a CSV file with header information from your TCP packets.
+    
+    \item[--] \texttt{utils/tcp.lua}: A Lua plugin so Wireshark can dissect our custom cmu packet format~\cite{wireshark-dissector}. \\ \texttt{capture\_packets.sh} shows how you can pass this file to \texttt{tshark} to parse packets. To use the plugin with the Wireshark GUI on your machine, you add this file to Wireshark's plugin folder ~\cite{wireshark-plugin}.
+\end{itemize}
+
+\subsection{Running tests with \texttt{pytest}}
+
+There are many ways you can write tests for your code for this project. To help get you started, \texttt{pytest}~\cite{pytest} is installed on the VMs and we provide example basic tests in \texttt{test/test\_cp1.py}. Running \texttt{make test} will run these tests automatically. You should expand these tests or use a different tool to test your code (but \texttt{make test} should still run your tests). As in Project 1, you should also use standard C debugging tools including \texttt{gdb} and \texttt{Valgrind} which are also installed on the VMs. 
+
+%You can log into a VM by using vagrant up, then vagrant ssh <NAME>. You can then set additional tc variables by using tcset and view the current settings with tcshow eth1.
+
+\subsection{Running a large file transfer}
+The starter code \texttt{client.c} and \texttt{server.c} will transmit a small file, \texttt{cmu\_tcp.c} between the client and server. You should also test your code by transmitting a larger file (ex: 100MB file), capturing the packets, and plotting the number of unacked packets vs. time. You will turn in a PDF of this graph and this PCAP file. \\
+
+You can use the utilities described in 7.3 to create \texttt{submit.pcap} by running the following commands: \\
+
+Start tcpdump and the server:
+\begin{verbatim}
+    vagrant@server:/vagrant/15-441-project-2$ make
+    vagrant@server:/vagrant/15-441-project-2$ utils/capture_packets.sh start submit.pcap
+    vagrant@server:/vagrant/15-441-project-2$ ./server 
+\end{verbatim}
+
+Start the client:
+\begin{verbatim}
+    vagrant@client:/vagrant/15-441-project-2$ ./client
+\end{verbatim}
+
+When the client and server code finishes running, stop the packet capture on the server:
+\begin{verbatim}
+   vagrant@server:/vagrant/15-441-project-2$ utils/capture_packets.sh stop submit.pcap
+\end{verbatim}
+
+

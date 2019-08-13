@@ -1,0 +1,35 @@
+
+As in Project 1, code submission for checkpoint and the final deadline will be done 
+through \jc{Autolab (autolab.cs.cmu.edu).}
+Every checkpoint will be a git tag in the code repo. To create a tag, run
+\[
+\texttt{git tag -a checkpoint-\textit{<num>} -m \textit{<message>} [\textit{<commit hash>}]}
+\]
+with appropriate checkpoint number and custom message filled in. (Put whatever
+you like for the message --- git won't let you omit it.) The optional commit
+hash can be used to specify a particular commit for the tag; it you omit it,
+the current commit is used. 
+\noindent For the checkpoint, you will be expected to have a working Makefile, and 
+whatever source needed to compile a working binary.  \textbf{Checkpoints that do not compile will
+NOT be graded.}  
+\jc{To submit your code, make a tarball file of your repo after you tag it. Then login to autolab website,
+choose \texttt{15-441: Computer Networks (S19) -> project2cp<{\it N}>}, and then upload your tarball.}
+The submitted tarball should contain a directory named \texttt{15-441-project-2}, which has 
+the following files that implement all required functionality:
+\begin{itemize}
+\item Makefile:  Make sure all the variables and paths are set correctly such 
+that your program compiles in the hand-in directory. Running \texttt{make test} should run your testing code.
+%Makefile should build the executable ``peer'' that runs on the andrew machines.
+\item All of your source code files and test files. (files ending in .c, .h, etc. only, no .o files and no executables)
+\item readme.txt: File containing a thorough description of your design and implementation. If you use any additional packet headers, please document them 
+here. 
+\item tests.txt: File containing documentation of your test cases and any known issues you have.
+
+\item submit.pcap: Your PCAP submission file from running the functionality code in server.c and client.c from the starter code (for a larger file transfer). 
+
+\item graph.pdf: Your graph of the currently unacked packets in flight vs time computed from submit.pcap. 
+\end{itemize}
+
+If you have an issue with uploading large files to Autolab, follow these directions: \url{https://piazza.com/class/jqfmjnmztjt4rv?cid=792}.
+
+

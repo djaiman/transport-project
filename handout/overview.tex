@@ -1,0 +1,12 @@
+
+In class, we have been talking about TCP, the default transport protocol on the Internet. TCP serves many purposes: it provides reliable, in-order delivery of bytes, it makes sure the sender does not send too fast and overwhelm the receiver (flow control), and it makes sure the sender does not send too fast and overwhelm the network (congestion control). It also aims to be fair: when multiple senders share the same link, they should receive roughly the same proportion of bandwidth.
+
+In class, we discussed TCP Reno. A variant of TCP Reno, NewReno used to be the standard TCP on the Internet. But these are just one of many congestion control algorithms (CCAs). Companies use different TCPs depending on the context, for example, one TCP for data centers and another for serving web content.
+
+If you are curious learn more about TCPs in the real world, here is are some fun CCAs to read about:
+Microsoft and Google use very different approaches to TCP in their datacenters. DCTCP is a TCP for datacenters designed by Microsoft. TIMELY is a TCP for datacenters designed by Google.
+For web content, the most common algorithm -- and the default in Linux servers -- is called Cubic. Akamai, the largest content distribution network in the world, uses a proprietary TCP called FastTCP.
+
+In this project, you will demonstrate your understanding of the TCP basics by implementing TCP Reno. You will then use your own engineering skills to design a modern TCP for the datacenter, the Internet, or Earth to Moon communication.
+
+

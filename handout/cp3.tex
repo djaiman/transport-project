@@ -1,0 +1,33 @@
+In checkpoint 3, you will improve your TCP implementation for one of three scenarios:
+\begin{enumerate}
+    \item Moon - For the moon, set loss rate to 30\%, 2.5 seconds of delay, and a max bandwith of 10 megabits per second. 
+    \item Data Center - For the data center, set loss rate to 0.05\%, delay 0.1 seconds, and a max bandwith of 5 gigabits per second. 
+    \item AWS Server to Client - For the server, set loss rate to 1\%, delay to 0.2 seconds, and a max bandwith of 50 megabits per second. 
+\end{enumerate}
+
+\noindent (A) Your first step is to {\it profile} your Reno implementation. Using your Reno implementation, transfer a 20MB file in your chosen scenario. How long does it take for the file transfer to complete? Consider Reno's design: what makes it slower than it could be? If the file transfer does not complete in a reasonable amount of town, why is this?
+
+\noindent{\bf Deliverable:} In a file called {\bf designdiscussion.pdf}, turn in a graph of your Reno implementation running in your chosen scenario. Write at least two paragraphs describing what aspects of Reno's design make it perform less-well than it could in your chose scenario. 
+
+\vspace{10pt}
+
+\noindent (B) Your second step is to design a new congestion control algorithm. There is only one requirement: that your new implementation finishes at least 10\% faster than your original implementation (or, if your first implementation did not complete within 20 minutes, that your new implementation does complete in that amount of time). One way to pass this step is to implement TCP Cubic or TCP BBR, but you may also design your own algorithm.
+
+\noindent{\bf Deliverable:} In the same file called {\bf designdiscussion.pdf}, provide a graph of your new algorithm running in your chosen scenario. Answer the following questions:
+\begin{enumerate}
+    \item Describe your new algorithm to someone else who needs to implement it too. How does it work? What is the `state machine' to update your new algorithm?
+    \item How long does it take for your new CCA to transfer a 20MB file? How long does it take your Reno implementation?
+    \item What is different about your new CCA that makes it perform better than Reno in tranferring 20MB files?
+    \item How long does it take for your new CCA to transfer a 3MB file? How long does it take your Reno implementation?
+    \item Explain why one algorithm performs better than the other, or why they perform equally.
+\end{enumerate}
+
+\vspace{10pt}
+
+\noindent (C) (Optional) In this step you will tune your algorithm for competition! The TAs will test the top-5 fastest algorithms by running them in a real datacenter (AWS or Google CLoud), over the real wide area (from CMU to AWS or Google Cloud), or to the (simulated, sorry) Moon.
+
+We will run two tests. First, we will transfer one 20MB file. We will measure the {\it average goodput} (the number of useful bytes transferred over time) from when we start sending to when the file transfer completes. Second, we will transfer four 20MB files simultaneously. We will measure each connection's average goodput and compute {\it Jain's Fairness Index.} Your total score will be the goodput for the single connection test, multiplied by Jain's Fairness Index for the four-connection test.
+
+You can run these tests yourself and tune your code. There will be one prize for each of the three categories. We have some credits for Google Cloud and AWS if you would like to test over the real scenarios, please email staff-441@cs.cmu.edu to request credits.
+
+
