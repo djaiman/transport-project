@@ -1,48 +1,73 @@
 \documentclass[10pt,letterpaper]{article}
+\usepackage[left=1in,top=1in,bottom=1in,right=1in]{geometry}
 \usepackage{graphicx}		% For the figures, allows scaling.
 \usepackage{lmodern}		% Needed to generated good PDF
-\usepackage{fullpage}
+\usepackage{listings}
+\usepackage{booktabs}
 \usepackage{subfigure}
 \usepackage{tabularx}
 \usepackage{psfrag}
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{color}
+\usepackage{array}
 
-\newcommand{\jc}[1]{{#1}}
+% \usepackage{breakurl}
+\sloppy
 
-\title{ 15-441: Computer Networks\\ Project 2: TCP in The Wild\\ }
+
+\newenvironment{packed_itemize}{
+\begin{list}{\labelitemi}{\leftmargin=2em}
+\vspace{-6pt}
+ \setlength{\itemsep}{0pt}
+ \setlength{\parskip}{0pt}
+ \setlength{\parsep}{0pt}
+}{\end{list}}
+
+
+
+\title{ 15-441/641: Computer Networks\\ Project 2: TCP in The Wild\\ }
 
 \author{TAs: Ranysha Ware (Ray)
              $<$\href{mailto:rware@andrew.cmu.edu }{rware@andrew.cmu.edu}$>$ \\
               Alex Bainbridge
              $<$\href{mailto:abainbri@andrew.cmu.edu}{abainbri@andrew.cmu.edu}$>$}
-\date{}
-
 
 \begin{document}
 
 \maketitle
 
-\section{Overview} 
+\section{Introduction} 
 \input{overview}
 
-\begin{table}[h]
 \begin{center}
-\begin{tabular}{l|l}
- \textbf{Date} & \textbf{Description} \\ \hline February 19 & Project
- released. \\ \jc{March 4} &
- \textbf{Checkpoint 1}: Data Serialization and transmission
- \\ \jc{March 22} &
- \textbf{Checkpoint 2}: TCP Reno implementation
- \\ \jc{March 29} & \textbf{Final Project Deadline by 11:59 P.M.} \\
+\vspace{10pt}
+\begin{tabular}{cp{2.5in}cccc}
+  {\bf CP}&{\bf Goal}&\multicolumn{2}{c}{{\bf \% P1 Grade}}&\multicolumn{2}{c}{{\bf Deadline}}\\
+  & & 441 & 641 & 441 & 641 \\
+
+  \hline
+  
+  \addlinespace[5pt]
+  1&Implement the three-way handshake and connection shutdown& X\% & X\% & Oct 8, 2019 & Oct 8, 2019 \\
+  
+  \addlinespace[5pt]
+  2&Implement flow control and Reno-style congestion control. & X\% & X\% & Oct 23, 2019 & Oct 23, 2019   \\
+  
+  \addlinespace[5pt]
+  3&Design, implement, and evaluate your own congestion control algorithm. & X\% & X\% & Oct 30, 2019 & Oct 30, 2019\\
 \end{tabular}
 \end{center}
-\label{tab:duedate}
-\end{table}
 
-
-
+\noindent At each checkpoint (CP), we will assess your implementation to
+verify that it supports all of the goals for the current checkpoint
+and we will rerun tests from the previous checkpoint(s) as well.  This
+means that if you fix a bug you had in an earlier checkpoint, you will
+get partial credit in a later checkpoint.  Of course, if you break a
+feature that was originally implemented correctly, you will lose some
+points, so you should return your tests from earlier checkpoints
+before you submit a later checkpoint.  
+%
 \section{CMU-TCP}
 \input{cmutcp}
 
